@@ -8,11 +8,6 @@ A relog mod with a name so long, you can just call it YARM for short.
 
 * Clickable UI buttons that let you relog from the relog character list.
 
-* Adventure Coin logging, which is displayed on the relog list.
-
-![](https://i.imgur.com/RUermGM.png)
-
-
 ## Commands
 Note, if using the commands in the toolbox channel or `/8`, ignore the `!` prefix.
 
@@ -36,9 +31,5 @@ Command | Argument(s) | Example | Description
 
 
 ## Changelog
-<details>
 
-### v112 - 1.0 (1/1/2021)
-- Initial release.
-
-</details>
+Forked from original module: https://github.com/hailstorming/Yet-Another-Relog-Mod

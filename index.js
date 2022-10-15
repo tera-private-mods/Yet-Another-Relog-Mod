@@ -2,6 +2,7 @@
 const modbase = 541; const modsub = 70000; let modsig = modbase.toString()+modsub.toString();
 const Prim = "#9f80ff", Seco = "#bf80ff", Tert = "#df80ff", Gry = "#999999", Wht = "#ffffff", Org = "#ffbf80", Red = "#ff8080"
 const hueArray = ['#ffb3b3', '#ffc6b3', '#ffd9b3', '#ffecb3', '#ffffb3', '#ecffb3', '#d9ffb3', '#c6ffb3', '#b3ffb3', '#b3ffc6', '#b3ffd9', '#b3ffec', '#b3ffff', '#b3ecff', '#b3d9ff', '#b3c6ff', '#b3b3ff', '#c6b3ff', '#d9b3ff', '#ecb3ff', '#ffb3ff', '#ffb3ec', '#ffb3d9', '#ffb3c6']
+const classes = ["Warrior", "Lancer", "Slayer", "Berserker", "Sorcerer", "Archer", "Priest", "Mystic", "Reaper", "Gunner", "Brawler", "Ninja", "Valkyrie"];
 
 module.exports = function YARM(d) {
     let basevalue = modsig-1;
@@ -29,10 +30,9 @@ module.exports = function YARM(d) {
       else return;
     })
 
-    d.hook('S_GET_USER_LIST', 21, (e) => {
+    d.hook('S_GET_USER_LIST', d.majorPatchVersion >= 95 ? 18 : 17, (e) => {
       e.characters.forEach((ch) => {
-        let { id, name, position, adventureCoins } = ch;
-        characters[--position] = { id, name, adventureCoins };
+        characters[--ch.position] = { id: ch.id, name: ch.name, class: ch.class };
       });
     });
 
@@ -85,7 +85,7 @@ module.exports = function YARM(d) {
       basevalue = modsig-1;
         characters.forEach((ch, i) => {
           basevalue = basevalue + 1
-          d.command.base.message(false, `<font color="${hueArray[i]}"><ChatLinkAction param=\"1#####${basevalue}@-1@Hail\">[Relog]</ChatLinkAction></font> <font color="${Prim}">${(i + 1)}</font>` + `<font color="${Gry}"> : </font>` + `<font color="${Seco}">${ch.name}</font>` + ` <font color="${Tert}"><font color="${Gry}">(</font>${ch.adventureCoins}<font color="${Gry}">)</font></font>`);
+          d.command.base.message(false, `<font color="${hueArray[i]}"><ChatLinkAction param=\"1#####${basevalue}@-1@Hail\">[Relog]</ChatLinkAction></font> <font color="${Prim}">${(i + 1)}</font>` + `<font color="${Gry}"> : </font>` + `<font color="${Seco}">${ch.name}</font>` + ` <font color="${Tert}"><font color="${Gry}">(</font>${classes[ch.class]}<font color="${Gry}">)</font></font>`);
         });
     }
 
